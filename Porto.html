@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            background-color: #1F1D1E;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* ===== SCROLL ANIMATION ===== */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1000px; /* Membatasi lebar maksimal */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(33px);
+            box-shadow: 0 0 30px rgba(227, 228, 237, 0.37);
+            border: 1.5px solid rgba(255, 255, 255, 0.18);
+            border-radius: 50px;
+            padding: 12px 25px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            height: 55px; /* Tinggi tetap */
+        }
+
+        .navbar.scrolled {
+            background: rgba(31, 29, 30, 0.95);
+        }
+
+        .navbar-logo {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px; /* Mengurangi gap */
+            align-items: center;
+        }
+
+        .navbar a {
+            color: rgb(244, 244, 244);
+            text-decoration: none;
+            font-size: 15px; /* Sedikit lebih kecil */
+            font-weight: 500;
+            padding: 8px 12px; /* Padding lebih kecil */
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            white-space: nowrap; /* Mencegah memanjang ke bawah */
+        }
+
+        .navbar a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .navbar-social {
+            display: flex;
+            gap: 8px;
+        }
+
+        .navbar-social a {
+            color: white;
+            font-size: 16px;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar-social a:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .navbar-social a[href*="instagram"]:hover {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+        }
+
+        .navbar-social a[href*="github"]:hover {
+            background: #333;
+            color: white;
+        }
+
+        .navbar-social a[href*="tiktok"]:hover {
+            background: #000;
+            color: white;
+        }
+
+        .navbar-social a[href*="facebook"]:hover {
+            background: #1877f2;
+            color: white;
+        }
+
+        /* ===== HERO SECTION ===== */
+        #home {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            gap: 20px;
+            background-image: url(https://motionbgs.com/media/5706/astral-defender-acheron.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            overflow: hidden;
+        }
+
+        #home::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: inherit;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.6) blur(3px);
+            transform: scale(1.1);
+            z-index: -1;
+        }
+
+        .hero-text, .hero-photo {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .hero-text {
+            align-items: flex-end;
+            text-align: right;
+            color: white;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .hero-text p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .hero-photo {
+            align-items: flex-start;
+        }
+
+        .hero-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px solid #A77B58;
+            transition: all 0.3s ease-out;
+        }
+
+        .hero-img:hover {
+            box-shadow: 0 0 15px #E0D0B6;
+            transform: translateY(-4px);
+        }
+
+        .button-me {
+            border: none;
+            padding: 10px 22px;
+            font-weight: 600;
+            font-size: 16px;
+            border-radius: 40px;
+            background-color: #805d4e;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .button-me:hover {
+            background-color: #8c614c;
+            transform: translateY(-2px);
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        #about {
+            min-height: 80vh;
+            padding: 80px 20px;
+        }
+
+        .about {
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about h1 {
+            color: #A77B58;
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .about > p {
+            color: rgba(255, 255, 255, 0.9);
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 50px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .parent {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .items {
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(167, 123, 88, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .items:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(167, 123, 88, 0.3);
+        }
+
+        .items h2, .items h3 {
+            color: #A77B58;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .items p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            font-size: 1em;
+            text-align: left;
+        }
+
+        .profile {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .personal-info {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .personal-info p {
+            font-size: 0.95em;
+        }
+
+        .additional-info {
+            grid-column: 1 / -1;
+            grid-row: 2;
+        }
+
+        /* ===== TOOLS SECTION ===== */
+        .tools {
+            padding: 80px 20px;
+            background-color: #1F1D1E;
+            text-align: center;
+        }
+
+        .tools h2 {
+            color: #A77B58;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .tools-container {
+            max-width: 1200px;
+            margin: 50px auto 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .tool-item {
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(167, 123, 88, 0.3);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+        }
+
+        .tool-item:hover {
+            transform: translateY(-15px) scale(1.05);
+        }
+
+        .tool-item[data-tool="html"]:hover {
+            background: rgba(228, 77, 38, 0.2);
+            border-color: #E44D26;
+            box-shadow: 0 15px 40px rgba(228, 77, 38, 0.4);
+        }
+
+        .tool-item[data-tool="css"]:hover {
+            background: rgba(38, 77, 228, 0.2);
+            border-color: #264DE4;
+            box-shadow: 0 15px 40px rgba(38, 77, 228, 0.4);
+        }
+
+        .tool-item[data-tool="javascript"]:hover {
+            background: rgba(247, 223, 30, 0.2);
+            border-color: #F7DF1E;
+            box-shadow: 0 15px 40px rgba(247, 223, 30, 0.4);
+        }
+
+        .tool-item[data-tool="wordpress"]:hover {
+            background: rgba(33, 117, 155, 0.2);
+            border-color: #21759B;
+            box-shadow: 0 15px 40px rgba(33, 117, 155, 0.4);
+        }
+
+        .tool-item[data-tool="tailwind"]:hover {
+            background: rgba(6, 182, 212, 0.2);
+            border-color: #06B6D4;
+            box-shadow: 0 15px 40px rgba(6, 182, 212, 0.4);
+        }
+
+        .tool-icon {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .tool-item:hover .tool-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .tool-name {
+            color: white;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tool-item[data-tool="html"] .tool-icon {
+            color: #E44D26;
+        }
+
+        .tool-item[data-tool="css"] .tool-icon {
+            color: #264DE4;
+        }
+
+        .tool-item[data-tool="javascript"] .tool-icon {
+            color: #F7DF1E;
+        }
+
+        .tool-item[data-tool="wordpress"] .tool-icon {
+            color: #21759B;
+        }
+
+        .tool-item[data-tool="tailwind"] .tool-icon {
+            color: #06B6D4;
+        }
+
+        /* ===== PROJECTS SECTION ===== */
+        #projects {
+            padding: 80px 20px;
+            background-color: #1F1D1E;
+        }
+
+        .projects-title {
+            text-align: center;
+            color: #A77B58;
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 50px;
+        }
+
+        .projects-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(167, 123, 88, 0.3);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: #A77B58;
+            box-shadow: 0 15px 40px rgba(167, 123, 88, 0.4);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.1);
+            filter: brightness(0.8);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-title {
+            color: #A77B58;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .project-desc {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            padding: 5px 15px;
+            background: rgba(167, 123, 88, 0.2);
+            border: 1px solid rgba(167, 123, 88, 0.5);
+            border-radius: 20px;
+            color: #A77B58;
+            font-size: 0.85em;
+        }
+
+        /* ===== GAMES SECTION ===== */
+        .gamesku {
+            padding: 80px 20px;
+            text-align: center;
+            background-color: #1F1D1E;
+        }
+
+        .gamesku h2 {
+            color: #A77B58;
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .games-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .games-items {
+            position: relative;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .games-items:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        .games-items img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+            transition: all 0.2s ease;
+        }
+
+        .games-items:hover img {
+            filter: brightness(0.7);
+            transform: scale(1.1);
+        }
+
+        .games-items h3 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 10px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .games-items:hover h3 {
+            opacity: 1;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 968px) {
+            .navbar {
+                width: 95%;
+                padding: 10px 20px;
+            }
+            
+            .navbar ul {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                width: 95%;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                padding: 10px 15px;
+                height: 50px;
+            }
+
+            .navbar ul {
+                gap: 10px;
+            }
+
+            .navbar a {
+                font-size: 14px;
+                padding: 6px 8px;
+            }
+
+            .navbar-social {
+                gap: 5px;
+            }
+
+            .navbar-social a {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar {
+                width: 98%;
+                padding: 8px 12px;
+                height: 48px;
+            }
+
+            .navbar ul {
+                gap: 8px;
+            }
+
+            .navbar a {
+                font-size: 13px;
+                padding: 4px 6px;
+            }
+
+            .navbar-logo {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-logo-container">
+            <img src="https://pbs.twimg.com/profile_images/1894298847045689345/UiNuDjVp_400x400.jpg" alt="Avatar" class="navbar-logo">
+        </div>
+        <div class="navbar-menu">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#tools">Tools</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#gamesku">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="navbar-social">
+            <a href="https://www.instagram.com/neetnero/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100075327763368" target="_blank"><i class="fab fa-facebook"></i></a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home">
+        <div class="hero-text">
+            <h1>Oh, Hi! It's Me, Nero</h1>
+            <p>Website dari Siswa SMKN 03 Kota Batu yang sedang <br> belajar membuat website portofolio sederhana</p>
+            <button class="button-me">Contact Me</button>
+        </div>
+        <div class="hero-photo">
+            <img src="https://pbs.twimg.com/profile_images/1894298847045689345/UiNuDjVp_400x400.jpg" class="hero-img" alt="Foto Profil">
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h1 class="scroll-animate">About Me</h1>
+        <p class="scroll-animate">
+            I'm Nero, a student enthusiastic about developing myself in both academic and practical fields.
+            I have interests in law, socio-political science, and web design. Besides focusing on my education,
+            I also manage my time well between studying, internships, and other productive activities. I believe
+            that hard work, consistency, and a passion for learning will open up many opportunities in the future.
+            With my internship experience and interest in technology, I continuously strive to develop new skills to
+            prepare myself for professional challenges.
+        </p>
+
+        <div class="parent">
+            <div class="profile items scroll-animate">
+                <h2>Profile</h2>
+                <p>
+                    Experienced in building company profile websites, service applications, inventory management, to
+                    online sales platforms.
+                </p>
+                <p>
+                    Proficient in HTML, CSS, JavaScript, WordPress. Experienced in application deployment, database 
+                    optimization, and creating user-friendly UI/UX.
+                </p>
+                <p>
+                    Able to communicate well to understand client needs and translate them into targeted technology solutions.
+                </p>
+            </div>
+            <div class="personal-info items scroll-animate">
+                <h3>Personal Information</h3>
+                <p><strong>Location:</strong> Batu, Jawa Timur, Indonesia</p>
+                <p><strong>Experience:</strong> 4+ Month</p>
+                <p><strong>Education:</strong> Teknik Jaringan Komputer dan Telekomunikasi</p>
+                <p><strong>Status:</strong> Idle</p>
+            </div>
+            <div class="additional-info items scroll-animate">
+                <h3>Certificate</h3>
+                <p>kosong sek</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section id="tools" class="tools">
+        <h2 class="scroll-animate">My Tools</h2>
+        <div class="tools-container">
+            <div class="tool-item scroll-animate" data-tool="html">                                             
+                <div class="tool-icon"><i class="fab fa-html5"></i></div>
+                <div class="tool-name">HTML</div>
+            </div>
+            <div class="tool-item scroll-animate" data-tool="css">
+                <div class="tool-icon"><i class="fab fa-css3-alt"></i></div>
+                <div class="tool-name">CSS</div>
+            </div>
+            <div class="tool-item scroll-animate" data-tool="javascript">
+                <div class="tool-icon"><i class="fab fa-js"></i></div>
+                <div class="tool-name">JavaScript</div>
+            </div>
+            <div class="tool-item scroll-animate" data-tool="wordpress">
+                <div class="tool-icon"><i class="fab fa-wordpress"></i></div>
+                <div class="tool-name">WordPress</div>
+            </div>
+            <div class="tool-item scroll-animate" data-tool="tailwind">
+                <div class="tool-icon"><i class="fas fa-wind"></i></div>
+                <div class="tool-name">Tailwind</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="projects-title scroll-animate">My Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card scroll-animate">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500" alt="Project 1" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">Company Profile Website</h3>
+                    <p class="project-desc">Professional company profile with modern design and responsive layout</p>
+                    <div class="project-tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card scroll-animate">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500" alt="Project 2" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">E-Commerce Platform</h3>
+                    <p class="project-desc">Full-featured online store with payment integration and admin panel</p>
+                    <div class="project-tags">
+                        <span class="tag">WordPress</span>
+                        <span class="tag">PHP</span>
+                        <span class="tag">MySQL</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card scroll-animate">
+                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=500" alt="Project 3" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">Inventory Management</h3>
+                    <p class="project-desc">Stock management system with real-time tracking and reporting</p>
+                    <div class="project-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Database</span>
+                        <span class="tag">API</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Section -->
+    <section class="gamesku" id="gamesku">
+        <h2 class="scroll-animate">Game yang di mainkan</h2>
+        <div class="games-container">
+            <div class="games-items scroll-animate">
+                <img src="https://d2ya09u1z2qlgr.cloudfront.net/public/storage/article/March2025/qEef8NRoCOnIpxuqMJxG.webp" alt="Mobile Legends">
+                <h3>Mobile Legends</h3>
+            </div>
+            <div class="games-items scroll-animate">
+                <img src="https://blogs.nvidia.com/wp-content/uploads/2024/05/gfn-thursday-5-9-nv-blog-1280x680-no-copy.jpg" alt="Honkai Star Rail">
+                <h3>Honkai: Star Rail</h3>
+            </div>
+            <div class="games-items scroll-animate">
+                <img src="https://www.suaramuhammadiyah.id/storage/posts/image/Roblox-20250812170924.jpg" alt="Roblox">
+                <h3>Roblox</h3>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with scroll-animate class
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.pageYOffset > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Contact button functionality
+        document.querySelector('.button-me').addEventListener('click', () => {
+            const contactSection = document.querySelector('#contact');
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                alert('Contact section coming soon!');
+            }
+        });
+    </script>
+</body>
+</html>
