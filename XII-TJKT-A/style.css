@@ -18,7 +18,7 @@ body {
 }
 
 /* ========================================
-   NAVBAR - MINIMAL DARK (seperti gambar)
+   NAVBAR - MINIMAL DARK
    ======================================= */
 .header {
     position: fixed;
@@ -40,32 +40,93 @@ body {
     color: #1a1a2e;
 }
 
-/* NAVBAR CONTAINER - UBAH INI */
 .navbar {
     padding: 1.1rem 0;
-    position: relative;  /* TAMBAH INI */
-    display: flex;       /* TAMBAH INI */
-    align-items: center; /* TAMBAH INI */
-    justify-content: center; /* TAMBAH INI */
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 100px 0 90px;  /* UBAH: kasih ruang kiri buat logo */
+    position: relative;
     display: flex;
-    justify-content: center;  /* KEMBALI ke center */
     align-items: center;
-    flex: 1;  /* TAMBAH INI */
+    justify-content: center;
 }
 
-/* INSTAGRAM POJOK KANAN - UBAH */
+/* ========================================
+   NAVBAR LOGO - PERBAIKAN UTAMA
+   ======================================= */
+.nav-logo {
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+.logo-img:hover {
+    transform: scale(1.1);
+}
+
+/* ========================================
+   NAVBAR SOCIAL ICON
+   ======================================= */
 .nav-social {
     position: absolute;
-    right: 40px;  /* POJOK KANAN! */
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
     z-index: 1001;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    text-decoration: none;
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: #ffffff;
+    color: #E4405F;
+    transform: translateY(-2px) scale(1.1);
+}
+
+.header.scrolled .social-link {
+    background: rgba(59, 91, 219, 0.1);
+    color: #1a1a2e;
+}
+
+.header.scrolled .social-link:hover {
+    background: #3b5bdb;
+    color: white;
+}
+
+/* ========================================
+   NAVBAR CONTAINER & MENU
+   ======================================= */
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 100px 0 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
 }
 
 .nav-menu {
@@ -121,7 +182,7 @@ body {
 }
 
 /* ========================================
-   HERO - Foto kelas fullscreen (gambar 1)
+   HERO
    ======================================= */
 .hero {
     height: 100vh;
@@ -175,7 +236,49 @@ body {
 }
 
 /* ========================================
-   WALI KELAS - Layout horizontal (gambar 2)
+   TENTANG KAMI
+   ======================================= */
+.tentang {
+    background: linear-gradient(#F0F0F0);
+    color: rgb(21, 21, 21);
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.tentang::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="0.5" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    pointer-events: none;
+}
+
+.tentang-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.tentang-text h3 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+}
+
+.tentang-text p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+/* ========================================
+   WALI KELAS
    ======================================= */
 .wali-kelas {
     background: #f7f8fc;
@@ -191,7 +294,6 @@ body {
     margin: 0 auto;
 }
 
-/* Foto kiri dengan frame card */
 .wali-photo-wrap {
     display: flex;
     justify-content: center;
@@ -220,7 +322,6 @@ body {
     display: block;
 }
 
-/* Badge "LEAD MENTOR" di bawah foto */
 .lead-badge {
     position: absolute;
     bottom: 18px;
@@ -236,7 +337,6 @@ body {
     white-space: nowrap;
 }
 
-/* Info kanan */
 .wali-info {
     display: flex;
     flex-direction: column;
@@ -290,7 +390,7 @@ body {
 }
 
 /* ========================================
-   SECTIONS (tidak berubah)
+   SECTIONS
    ======================================= */
 section { padding: 120px 0; }
 
@@ -314,7 +414,9 @@ section { padding: 120px 0; }
     margin: 0 auto;
 }
 
-/* Murid 32 Foto */
+/* ========================================
+   MURID
+   ======================================= */
 .murid { background: #f8f9fa; }
 
 .murid-grid {
@@ -370,7 +472,6 @@ section { padding: 120px 0; }
     line-height: 1.3;
 }
 
-/* INSTAGRAM BUTTON HOVER */
 .murid-instagram {
     opacity: 0;
     transform: translateY(10px);
@@ -409,15 +510,9 @@ section { padding: 120px 0; }
     font-size: 0.7rem;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .murid-ig-btn {
-        font-size: 0.6rem;
-        padding: 0.3rem 0.6rem;
-    }
-}
-
-/* Kenangan */
+/* ========================================
+   KENANGAN
+   ======================================= */
 .kenangan { background: white; }
 
 .kenangan-grid {
@@ -450,169 +545,8 @@ section { padding: 120px 0; }
     transform: scale(1.05);
 }
 
-/* Footer */
-.footer {
-    background: #1a1a2e;
-    color: white;
-    text-align: center;
-    padding: 3rem 0;
-    font-size: 1.1rem;
-}
-
-/* Animations */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 /* ========================================
-   RESPONSIVE
-   ======================================= */
-@media (max-width: 768px) {
-    .hamburger { display: flex; }
-
-    .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 65px;
-        flex-direction: column;
-        background: rgba(20, 20, 40, 0.97);
-        width: 100%;
-        text-align: center;
-        transition: all 0.4s ease;
-        padding: 3rem 0;
-        gap: 2rem;
-    }
-
-    .nav-menu.active { left: 0; }
-
-    .nav-link {
-        font-size: 1rem;
-        color: white !important;
-    }
-
-    .hero-text h1 { font-size: 4rem; }
-
-    .wali-layout {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-    }
-
-    .wali-photo-card { width: 260px; }
-
-    .murid-grid {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-        gap: 1.2rem;
-    }
-
-    .section-header h2 { font-size: 2.2rem; }
-
-    /* ========================================
-   NAVBAR LOGO & SOCIAL - BARU
-   ======================================= */
-.nav-logo {
-    position: absolute;
-    left: 40px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1001;
-}
-
-.logo-img {
-    height: 45px;
-    width: auto;
-    transition: transform 0.3s ease;
-}
-
-.logo-img:hover {
-    transform: scale(1.1);
-}
-
-.nav-social {
-    display: flex;
-    align-items: center;
-}
-
-.social-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 45px;
-    height: 45px;
-    background: rgba(255, 255, 255, 0.15);
-    color: white;
-    text-decoration: none;
-    border-radius: 50%;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    margin-left: 1rem;
-}
-
-.social-link:hover {
-    background: #ffffff;
-    transform: translateY(-2px) scale(1.1);
-}
-
-.header.scrolled .social-link {
-    background: rgba(255, 255, 255, 0.15);
-    color: #1a1a2e;
-}
-
-.header.scrolled .social-link:hover {
-    background: #3b5bdb;
-    color: white;
-}
-
-/* ========================================
-   TENTANG KAMI - BARU
-   ======================================= */
-.tentang {
-    background: linear-gradient(#F0F0F0 );
-    color: rgb(21, 21, 21);
-    padding: 120px 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.tentang::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="0.5" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-    pointer-events: none;
-}
-
-.tentang-content {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.tentang-text h3 {
-    font-size: 2.2rem;
-    font-weight: 800;
-    margin-bottom: 2rem;
-    opacity: 0.95;
-}
-
-.tentang-text p {
-    font-size: 1.15rem;
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-    opacity: 0.9;
-}
-
-/* ========================================
-   LOKASI SEKOLAH - BARU
+   LOKASI
    ======================================= */
 .lokasi {
     background: #f8f9fa;
@@ -672,7 +606,18 @@ section { padding: 120px 0; }
 }
 
 /* ========================================
-   MODAL ZOOM KENANGAN - BARU
+   FOOTER
+   ======================================= */
+.footer {
+    background: #1a1a2e;
+    color: white;
+    text-align: center;
+    padding: 3rem 0;
+    font-size: 1.1rem;
+}
+
+/* ========================================
+   MODAL ZOOM KENANGAN
    ======================================= */
 .kenangan-modal {
     display: none;
@@ -696,6 +641,8 @@ section { padding: 120px 0; }
     display: flex;
     align-items: center;
     justify-content: center;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 #modalImage {
@@ -723,59 +670,102 @@ section { padding: 120px 0; }
     transform: scale(1.1);
 }
 
-/*   NAVBAR RESPONSIVE TAMBAHAN */
+/* ========================================
+   ANIMATIONS
+   ======================================= */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
+/* ========================================
+   RESPONSIVE - TABLET
+   ======================================= */
 @media (max-width: 768px) {
+    .hamburger { display: flex; }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 65px;
+        flex-direction: column;
+        background: rgba(20, 20, 40, 0.97);
+        width: 100%;
+        text-align: center;
+        transition: all 0.4s ease;
+        padding: 3rem 0;
+        gap: 2rem;
+    }
+
+    .nav-menu.active { left: 0; }
+
+    .nav-link {
+        font-size: 1rem;
+        color: white !important;
+    }
+
     .nav-logo {
         left: 20px;
     }
-    
+
     .logo-img {
         height: 38px;
     }
-    
+
     .nav-container {
-        padding: 0 20px;
+        padding: 0 80px 0 70px;
     }
-    
+
     .nav-social {
-        margin-left: auto;
+        right: 20px;
     }
-    
-    .social-link {
-        width: 40px;
-        height: 40px;
-        margin-left: 0.5rem;
+
+    .hero-text h1 { font-size: 4rem; }
+
+    .wali-layout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
     }
-    
-    .hamburger {
-        margin-left: 1rem;
+
+    .wali-photo-card { width: 260px; }
+
+    .murid-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 1.2rem;
     }
-    
+
+    .murid-ig-btn {
+        font-size: 0.6rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    .section-header h2 { font-size: 2.2rem; }
+
     .lokasi-info {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
-    
+
     .info-item {
         padding: 1.5rem;
     }
 }
 
+/* ========================================
+   RESPONSIVE - MOBILE
+   ======================================= */
 @media (max-width: 480px) {
     .nav-logo { left: 15px; }
     .logo-img { height: 35px; }
-    
+
     .close-modal {
         right: 20px;
         font-size: 2.5rem;
     }
-
-@media (max-width: 768px) {
-    .nav-container {
-        padding: 0 80px 0 70px; /* Logo kiri + hamburger kanan */
-    }
-}
-
-}
 }
