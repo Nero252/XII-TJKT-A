@@ -5,11 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XII TJKT - Kelas XII TJKT A</title>
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Barlow:wght@300;400;500&display=swap"
-        rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Favicon - PASTIKAN ADA DI PUBLIC/FOLDER -->
     <link rel="icon" href="favicon.ico">
 </head>
 
@@ -19,6 +25,7 @@
         <nav class="navbar">
             <!-- Logo Sekolah Kiri -->
             <div class="nav-logo">
+                <!-- PASTIKAN FILE ADA DI public/logo/1.webp atau .jpg -->
                 <img src="logo/1.webp" alt="Logo Sekolah" class="logo-img">
             </div>
 
@@ -57,7 +64,7 @@
         </div>
     </section>
 
-    <!-- Tentang Kami - BARU -->
+    <!-- Tentang Kami -->
     <section id="tentang" class="tentang">
         <div class="container">
             <div class="section-header">
@@ -77,7 +84,7 @@
         </div>
     </section>
 
-    <!-- Wali Kelas - Layout Horizontal seperti gambar -->
+    <!-- Wali Kelas -->
     <section id="wali-kelas" class="wali-kelas">
         <div class="container">
             <div class="wali-layout">
@@ -85,6 +92,7 @@
                 <div class="wali-photo-wrap">
                     <a href="#" onclick="openInstagram('tiaratarra'); return false;">
                         <div class="wali-photo-card">
+                            <!-- PASTIKAN: public/murid/wali.webp ADA -->
                             <img src="murid/wali.webp" alt="Wali Kelas">
                             <div class="lead-badge">WALI KELAS</div>
                         </div>
@@ -126,7 +134,7 @@
         </div>
     </section>
 
-    <!-- Lokasi Sekolah - BARU -->
+    <!-- Lokasi Sekolah -->
     <section id="lokasi" class="lokasi">
         <div class="container">
             <div class="section-header">
@@ -173,10 +181,16 @@
         </div>
     </footer>
 
-    <!-- Modal Zoom Kenangan - BARU -->
+    <!-- Modal Zoom Kenangan -->
     <div id="kenanganModal" class="kenangan-modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <img id="modalImage" src="" alt="Kenangan Zoom">
         </div>
-    >
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>
