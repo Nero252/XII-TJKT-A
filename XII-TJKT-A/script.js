@@ -11,7 +11,7 @@ function openInstagram(username) {
     }
 }
 
-// Data Murid - Instagram Ready
+// Data Murid
 const muridData = [
     { nama: 'ACHMAD YUSRIL ALAMSYAH', foto: 'murid/1.webp', instagram: 'https://www.instagram.com/areallight._?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==' },
     { nama: 'ADISTYA PUTRI MAYASARI', foto: 'murid/2.webp', instagram: 'https://www.instagram.com/adstya.mya/?utm_source=ig_web_button_share_sheet' },
@@ -51,6 +51,9 @@ const muridData = [
 const kenanganData = [
     'galeri/1.jpg','galeri/2.jpg','galeri/3.jpg','galeri/4.jpg',
     'galeri/5.jpg','galeri/6.jpg','galeri/7.jpg','galeri/8.jpg',
+    'galeri/9.jpg','galeri/10.jpg','galeri/11.jpg','galeri/12.jpg',
+    'galeri/13.jpg','galeri/14.jpg','galeri/15.jpg','galeri/16.jpg',
+    'galeri/17.jpg'
 ];
 
 // Elements
@@ -60,7 +63,7 @@ const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
 // =============================================
-// RENDER MURID - LAZY LOAD OPTIMIZED
+// RENDER MURID - LAZY LOAD
 // =============================================
 function renderMurid() {
     muridGrid.innerHTML = muridData.map((murid) => {
