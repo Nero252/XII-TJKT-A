@@ -53,7 +53,7 @@ const kenanganData = [
     'galeri/5.jpg','galeri/6.jpg','galeri/7.jpg','galeri/8.jpg',
     'galeri/9.jpg','galeri/10.jpg','galeri/11.jpg','galeri/12.jpg',
     'galeri/13.jpg','galeri/14.jpg','galeri/15.jpg','galeri/16.jpg',
-    'galeri/17.jpg'
+    'galeri/17.jpg','galeri/18.jpg','galeri/19.jpg'
 ];
 
 // Elements

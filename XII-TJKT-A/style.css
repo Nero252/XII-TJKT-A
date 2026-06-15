@@ -205,16 +205,17 @@ body {
 .hero-content {
     position: relative;
     z-index: 2;
+    margin-top: -50px;
 }
 
 .hero-text h1 {
-    font-size: clamp(4rem, 5vw, 3rem);
+    font-size: clamp(3rem, 4vw, 3rem);
     font-weight: 800;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.05em;
     color: white;
     text-shadow: 4px 4px 15px rgba(0,0,0,0.2);
-    animation: fadeInUp 0.9s ease both;
-    line-height: 1;
+    animation: fadeInUp 1.0s ease both;
+    line-height: 2;
 }
 
 .hero-sub {
