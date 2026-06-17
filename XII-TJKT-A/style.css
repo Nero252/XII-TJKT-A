@@ -279,6 +279,216 @@ body {
 }
 
 /* ========================================
+   TIMELINE
+   ======================================= */
+
+/* Penyelarasan Global & Utility (Tambahan pendukung konten) */
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center; /* Membuat judul bagian tengah halaman */
+}
+
+.tentang h3 {
+    font-size: 2rem;
+    color: #1a1a2e;
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.tentang-text p {
+    color: #3c3c3c;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    font-size: 1.05rem;
+}
+
+/* ========================================
+   TIMELINE
+   ======================================= */
+.timeline-section {
+    margin-top: 4rem;
+}
+
+.timeline {
+    margin-top: 2.5rem;
+    position: relative;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 15px; /* Mengubah top dari 0 ke 15px agar garis dimulai tepat dari tengah lingkaran pertama */
+    bottom: 0;
+    width: 3px;
+    background: #3b5bdb;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 60px;
+    margin-bottom: 3rem;
+    text-align: left;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 12px; /* Disesuaikan dari 11px ke 12px agar pas di tengah garis selebar 3px */
+    top: 6px;  /* Tetap dijaga agar sejajar secara vertikal dengan baris pertama teks judul */
+    width: 18px;
+    height: 18px;
+    background: #3b5bdb;
+    border-radius: 50%;
+    border: 4px solid rgb(255, 255, 255);
+    box-shadow: 0 0 0 3px rgba(59, 91, 219, 0.2);
+    z-index: 1; /* Menambahkan z-index agar lingkaran berada di atas garis vertikal secara sempurna */
+}
+
+.timeline-item h4 {
+    font-size: 1.3rem;
+    color: #1a1a2e;
+    margin-bottom: 0.6rem;
+    font-weight: 700;
+}
+
+.timeline-item p {
+    color: #3c3c3c;
+    line-height: 1.8;
+}
+
+/* ========================================
+   VISI MISI
+   ======================================= */
+.visi-misi {
+    margin-top: 5rem;
+}
+
+.visi-text {
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    color: #3c3c3c;
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.visi-misi ul {
+    list-style: none;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.visi-misi li {
+    background: white;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #3c3c3c;
+}
+
+.visi-misi li i {
+    color: #3b5bdb;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+/* ========================================
+   CERITA ANGKATAN
+   ======================================= */
+.cerita-angkatan {
+    margin-top: 5rem;
+}
+
+.cerita-angkatan p {
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    color: #3c3c3c;
+    line-height: 1.8;
+    text-align: center;
+}
+
+/* ========================================
+   PENCAPAIAN
+   ======================================= */
+.achievement-section {
+    margin-top: 5rem;
+}
+
+.achievement-grid {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.achievement-card {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 10px; /* Tidak terlalu bulat, pas 14px */
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.04); /* Bayangan dibuat lebih lembut & flat */
+    border: 3px solid rgba(40, 55, 113, 0.547); /* Outline biru tipis menggunakan warna tema #3b5bdb */
+}
+
+.achievement-card h4 {
+    color: #1a2550;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.achievement-card p {
+    color: #3c3c3c;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* ========================================
+   QUOTE PENUTUP
+   ======================================= */
+.quote-kelas {
+    margin-top: 6rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.quote-kelas blockquote {
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 300;
+    color: #2b2b42;
+    max-width: 750px;
+    margin: 0 auto;
+    line-height: 1.8;
+    position: relative;
+}
+
+/* Opsional hiasan tanda kutip */
+.quote-kelas blockquote::before {
+    content: '“';
+    font-size: 4rem;
+    color: rgba(59, 91, 219, 0.15);
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* ========================================
    WALI KELAS
    ======================================= */
 .wali-kelas {
@@ -404,6 +614,118 @@ body {
 }
 
 /* ========================================
+   PESAN & KESAN
+   ======================================= */
+
+.pesan-kesan {
+    max-width: 850px;
+    margin: 5rem auto 0;
+    text-align: center;
+}
+
+.pesan-kesan h3 {
+    font-size: 2rem;
+    color: #1a1a2e;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+}
+
+.pesan-kesan p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: #3c3c3c;
+    margin-bottom: 1.5rem;
+}
+
+/* ========================================
+   FAKTA WALI KELAS
+   ======================================= */
+
+.teacher-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 4rem;
+}
+
+.fact-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    border: 3px solid rgba(29, 37, 69, 0.364);
+}
+
+.fact-card h4 {
+    color: #131d45;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.fact-card p {
+    color: #3c3c3c;
+    font-size: 0.95rem;
+}
+
+/* ========================================
+   QUOTE WALI KELAS
+   ======================================= */
+
+.teacher-quote {
+    margin-top: 5rem;
+    text-align: center;
+}
+
+.teacher-quote blockquote {
+    max-width: 800px;
+    margin: auto;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: #1a1a2e;
+    line-height: 1.8;
+    font-weight: 300;
+    position: relative;
+}
+
+.teacher-quote blockquote::before {
+    content: '"';
+    font-size: 5rem;
+    color: rgba(59, 91, 219, 0.15);
+    position: absolute;
+    left: -20px;
+    top: -30px;
+}
+
+/* ========================================
+   TERIMA KASIH
+   ======================================= */
+
+.thank-you {
+    margin-top: 6rem;
+    background: white;
+    padding: 3rem;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.08);
+}
+
+.thank-you h3 {
+    font-size: 2rem;
+    color: #1a1a2e;
+    margin-bottom: 1.2rem;
+}
+
+.thank-you p {
+    max-width: 700px;
+    margin: auto;
+    color: #3c3c3c;
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+/* ========================================
    SECTIONS
    ======================================= */
 section { padding: 120px 0; }
@@ -423,7 +745,7 @@ section { padding: 120px 0; }
 
 .section-header p {
     font-size: 1.0rem;
-    color: #7f8c8d;
+    color: #3c3c3c;
     max-width: 700px;
     margin: 0 auto;
 }
@@ -524,6 +846,17 @@ section { padding: 120px 0; }
     font-size: 0.7rem;
 }
 
+.member-footer-text {
+    max-width: 800px;
+    margin: 4rem auto 0;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.9;
+    color: #3c3c3c;
+    font-style: italic;
+    margin-bottom: 5rem;
+}
+
 /* ========================================
    KENANGAN
    ======================================= */
@@ -575,6 +908,130 @@ section { padding: 120px 0; }
     gap: 2rem;
     max-width: 900px;
     margin: 0 auto;
+}
+/* ========================================
+   SECTION LOKASI - CUSTOM RADIUS & BORDER
+   ======================================= */
+.lokasi-section {
+    padding: 6rem 0;
+    background: #ffffff; 
+}
+
+.lokasi-wrapper {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 3rem;
+    align-items: stretch;
+}
+
+@media (max-width: 992px) {
+    .lokasi-wrapper {
+        flex-direction: column;
+    }
+}
+
+/* Kolom Kiri: Peta tetap konsisten */
+.map-container {
+    flex: 1.2;
+    min-height: 450px;
+    border-radius: 8px; /* Disamakan menjadi 8px agar serasi */
+    overflow: hidden;
+    border: 1px solid rgba(59, 91, 219, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* Kolom Kanan: Menjadi pembungkus transparan tanpa background putih besar */
+.lokasi-info-card {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Jarak antar kotak informasi */
+    justify-content: flex-start;
+}
+
+.lokasi-info-card h3 {
+    font-size: 1.8rem;
+    color: #1a1a2e;
+    font-weight: 800;
+    margin-bottom: 0.2rem;
+}
+
+.info-item {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    background: #ffffff;
+    padding: 1.2rem 1.5rem;
+    border: 1px solid rgba(59, 91, 219, 0.25); 
+    border-radius: 6px; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.info-icon {
+    width: 42px;
+    height: 42px;
+    background: #3b5bdb;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 1;
+}
+
+.info-icon i {
+    color: #ffffff !important;
+    font-size: 0.7rem;
+    display: block;
+}
+
+.info-text {
+    flex: 1;
+}
+
+.info-text h4 {
+    font-size: 0.85rem;
+    color: #3b5bdb;
+    font-weight: 700;
+    margin-bottom: 0.15rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-text p {
+    font-size: 0.95rem;
+    color: #333333;
+    line-height: 1.4;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Tombol Rute */
+.btn-rute {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #3b5bdb;
+    color: white;
+    text-decoration: none;
+    padding: 0.9rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    text-align: center;
+    transition: background 0.2s ease;
+}
+
+.btn-rute:hover {
+    background: #2b49c4;
 }
 
 .info-item {

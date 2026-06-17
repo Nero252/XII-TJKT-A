@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Kenangan - XII TJKT A</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-logo">
+                <img src="logo/1.webp" alt="Logo Sekolah" class="logo-img">
+            </div>
+
+            <div class="nav-container">
+                <ul class="nav-menu">
+                    <li><a href="Home.html" class="nav-link">HOME</a></li>
+                    <li><a href="about.html" class="nav-link">TENTANG KAMI</a></li>
+                    <li><a href="wali-kelas.html" class="nav-link">WALI KELAS</a></li>
+                    <li><a href="murid.html" class="nav-link">SISWA</a></li>
+                    <li><a href="kenangan.html" class="nav-link active">GALERI</a></li> 
+                    <li><a href="lokasi.html" class="nav-link">LOKASI</a></li>
+                </ul>
+                <div class="nav-social">
+                    <a href="https://www.instagram.com/xii.tjkta_smega?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                        target="_blank" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                <div class="hamburger">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section id="kenangan" class="kenangan">
+        <div class="container">
+            <div class="section-header">
+                <h2>KENANGAN YANG SUDAH BERLALU</h2>
+                <p>Kumpulan dokumentasi kebersamaan Kelas XII TJKT A selama di sekolah</p>
+            </div>
+            
+            <div class="kenangan-grid" id="kenanganGrid"></div>
+        </div>
+    </section>
+
+    <div id="kenanganModal" class="modal" style="display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); overflow: auto;">
+        <span class="close-modal" style="position: absolute; top: 20px; right: 35px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer;">&times;</span>
+        <img class="modal-content" id="modalImage" style="margin: auto; display: block; max-width: 80%; max-height: 80%; margin-top: 5%;">
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Dibuat untuk mengenang XII TJKT A angkatan 20</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

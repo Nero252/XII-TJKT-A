@@ -63,16 +63,21 @@ const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
 // =============================================
-// RENDER MURID - LAZY LOAD
+// RENDER MURID - DENGAN PROTEKSI ELEMEN
 // =============================================
 function renderMurid() {
-    muridGrid.innerHTML = muridData.map((murid) => {
+    if (!muridGrid) return; // Mencegah error jika halaman yang dibuka bukan murid.html
+
+    muridGrid.innerHTML = muridData.map((murid, index) => {
         const igUrl = murid.instagram;
         const username = igUrl
             .replace('https://instagram.com/', '')
             .replace('https://www.instagram.com/', '')
             .split('?')[0]
             .replace(/\/$/, '');
+
+        // Membuat nomor absen dua digit otomatis (01, 02, dst)
+        const noAbsen = String(index + 1).padStart(2, '0');
 
         return `
             <div class="murid-card">
@@ -85,15 +90,13 @@ function renderMurid() {
                         width="130"
                         height="130"
                         decoding="async">
+                    <span class="absen-badge">Absen ${noAbsen}</span>
                 </div>
                 <div class="murid-name">${murid.nama}</div>
-                <a href="https://www.instagram.com/${username}/"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="murid-instagram">
+                <a href="#" onclick="openInstagram('${username}'); return false;" class="murid-instagram">
                     <span class="murid-ig-btn">
                         <i class="fab fa-instagram"></i>
-                        Instagram
+                        @${username}
                     </span>
                 </a>
             </div>
@@ -117,8 +120,10 @@ function renderMurid() {
     lazyImages.forEach(img => imgObserver.observe(img));
 }
 
-// Render Kenangan
+// Render Kenangan dengan Proteksi
 function renderKenangan() {
+    if (!kenanganGrid) return; // Mencegah error jika halaman tidak memiliki kenanganGrid
+    
     kenanganGrid.innerHTML = kenanganData.map(src => `
         <div class="kenangan-card">
             <img src="${src}" alt="Kenangan" loading="lazy" decoding="async">
@@ -127,34 +132,43 @@ function renderKenangan() {
 }
 
 // Mobile Menu Toggle
-hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    hamburger.classList.toggle('active');
-});
-
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
+if (hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
     });
-});
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+        });
+    });
+}
 
 // Smooth Scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const target = document.querySelector(targetId);
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     });
 });
 
 // Navbar scroll effect
 window.addEventListener('scroll', () => {
     const header = document.querySelector('.header');
-    if (window.scrollY > window.innerHeight * 0.7) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
+    if (header) {
+        if (window.scrollY > window.innerHeight * 0.7) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
     }
 });
 
@@ -175,38 +189,40 @@ document.querySelectorAll('section').forEach(section => {
     observer.observe(section);
 });
 
-// Modal Zoom Kenangan
+// Modal Zoom Kenangan - Hanya bekerja jika modalnya ada di HTML
 const kenanganModal = document.getElementById('kenanganModal');
 const modalImage = document.getElementById('modalImage');
 const closeModal = document.querySelector('.close-modal');
 
-document.addEventListener('click', function(e) {
-    if (e.target.closest('.kenangan-card')) {
-        const imgSrc = e.target.closest('.kenangan-card').querySelector('img').src;
-        modalImage.src = imgSrc;
-        kenanganModal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    }
-});
+if (kenanganModal && modalImage && closeModal) {
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.kenangan-card')) {
+            const imgSrc = e.target.closest('.kenangan-card').querySelector('img').src;
+            modalImage.src = imgSrc;
+            kenanganModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+    });
 
-closeModal.addEventListener('click', () => {
-    kenanganModal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-});
-
-kenanganModal.addEventListener('click', function(e) {
-    if (e.target === kenanganModal) {
+    closeModal.addEventListener('click', () => {
         kenanganModal.style.display = 'none';
         document.body.style.overflow = 'auto';
-    }
-});
+    });
 
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && kenanganModal.style.display === 'block') {
-        kenanganModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-});
+    kenanganModal.addEventListener('click', function(e) {
+        if (e.target === kenanganModal) {
+            kenanganModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && kenanganModal.style.display === 'block') {
+            kenanganModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+}
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
